@@ -21,3 +21,5 @@ class DefaultStringToIntMapper : StringToIntMapper {
     return string.toInt()
   }
 }
+
+Capital letters make a method public else private
