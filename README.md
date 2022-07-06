@@ -27,3 +27,5 @@ Capital letters make a method public else private
 Defer executes the statement at the end of the function. In LIFO order.
 
 For files we have io utils package.
+file, err := os.Create("./nylcogofile.text");
+io.WriteString(file, "content here")
