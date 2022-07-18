@@ -29,3 +29,6 @@ Defer executes the statement at the end of the function. In LIFO order.
 For files we have io utils package.
 file, err := os.Create("./nylcogofile.text");
 io.WriteString(file, "content here")
+
+
+Array is less used as compare to Slice for a list of data.
