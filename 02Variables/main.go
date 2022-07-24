@@ -48,6 +48,9 @@ func main() {
 	fmt.Printf("%T",Website);
 
 
+	//declaring constants
+	const hello = "Hello, 世界"
+
 
 
 

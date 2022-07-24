@@ -1,5 +1,8 @@
 # Golang-web-dev
 
+go.dev
+pkg.go.dev
+
 Main method is the entry point.
 
 Gohtml is just a convention. You can rename it anything.
@@ -32,3 +35,7 @@ io.WriteString(file, "content here")
 
 
 Array is less used as compare to Slice for a list of data.
+
+
+https://www.youtube.com/watch?v=zYIZtbyUIDY&list=PLRAV69dS1uWQGDQoBYMZWKjzuhCaOnBpa&index=7&ab_channel=HiteshChoudhary
+
