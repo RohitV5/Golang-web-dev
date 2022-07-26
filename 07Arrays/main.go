@@ -20,7 +20,7 @@ func main() {
 	fmt.Println("Fruit list length is", len(fruitList))
 	// Will give the defined value of array irrespective of what is stored in array.
 
-	var vegList = [5]string{"potato", "beans", "squash"}
+	var vegList = [5]string{"Potato", "Beans", "Squash"}
 
 	fmt.Println("Vegetable list is: ", vegList)
 	//console puts a blank space if any index is empty
