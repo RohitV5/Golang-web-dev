@@ -36,6 +36,9 @@ io.WriteString(file, "content here")
 
 Array is less used as compare to Slice for a list of data.
 
+Making build for windows, unix and mac
+go build
+
 
 https://www.youtube.com/watch?v=zYIZtbyUIDY&list=PLRAV69dS1uWQGDQoBYMZWKjzuhCaOnBpa&index=7&ab_channel=HiteshChoudhary
 
