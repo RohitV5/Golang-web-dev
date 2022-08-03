@@ -40,5 +40,5 @@ Making build for windows, unix and mac
 go build
 
 
-https://www.youtube.com/watch?v=f_xNeRurjZY&list=PLRAV69dS1uWQGDQoBYMZWKjzuhCaOnBpa&index=18&ab_channel=HiteshChoudhary
+https://www.youtube.com/watch?v=TrouRtr5xWE&list=PLRAV69dS1uWQGDQoBYMZWKjzuhCaOnBpa&index=34
 
