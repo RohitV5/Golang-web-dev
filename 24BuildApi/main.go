@@ -3,7 +3,10 @@ package main
 import (
 	"encoding/json"
 	"fmt"
+	"math/rand"
 	"net/http"
+	"strconv"
+	"time"
 
 	"github.com/gorilla/mux"
 )
@@ -22,8 +25,12 @@ type Author struct {
 }
 
 //middleware, helper - file
-func IsEmpty(c *Course) bool {
+func (c *Course) IsEmpty() bool {
 	return c.CourseId == "" && c.CourseName == ""
+}
+
+func (c *Course) IsEmptyWhileCreate() bool {
+	return c.CourseName == ""
 }
 
 //fake DB
@@ -59,6 +66,33 @@ func getOneCourse(w http.ResponseWriter, r *http.Request) {
 	}
 	json.NewEncoder(w).Encode("No Course found with given id")
 	return
+}
+
+func createOneCourse(w http.ResponseWriter, r *http.Request) {
+	fmt.Println("Create One courses")
+	w.Header().Set("Content-Type", "application/json")
+
+	//what if body is empty
+	if r.Body == nil {
+		json.NewEncoder(w).Encode("Please send some data")
+	}
+
+	//what about data like {}
+	var course Course
+	_ = json.NewDecoder(r.Body).Decode(&course)
+
+	if course.IsEmptyWhileCreate() {
+		json.NewEncoder(w).Encode("Please send some data, no data inside")
+		return
+	}
+
+	//generate unique id and convert to string
+
+	//append course into courses
+
+	rand.Seed(time.Now().UnixNano())
+	course.CourseId = strconv.Itoa(rand.Intn(100))
+
 }
 
 func main() {
