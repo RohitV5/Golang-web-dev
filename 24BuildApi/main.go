@@ -95,6 +95,25 @@ func createOneCourse(w http.ResponseWriter, r *http.Request) {
 
 }
 
+func updateOneCourse(w http.ResponseWriter, r *http.Request) {
+	fmt.Println("Create One courses")
+	w.Header().Set("Content-Type", "application/json")
+
+	//grab id from request
+	params := mux.Vars(r)
+
+
+	//loop, id, remove, add with my id
+
+	for index, course := range courses {
+		if course.CourseId == params["id"]{
+			courses = append(courses[:index],courses[index+1:]... )
+			json.NewDecoder(r.Body).Decode()
+		}
+	}
+
+}
+
 func main() {
 
 }
