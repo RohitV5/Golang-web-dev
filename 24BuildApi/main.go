@@ -102,15 +102,22 @@ func updateOneCourse(w http.ResponseWriter, r *http.Request) {
 	//grab id from request
 	params := mux.Vars(r)
 
-
-	//loop, id, remove, add with my id
+	//loop, get id data, remove from array, update with my id
 
 	for index, course := range courses {
-		if course.CourseId == params["id"]{
-			courses = append(courses[:index],courses[index+1:]... )
-			json.NewDecoder(r.Body).Decode()
+		if course.CourseId == params["id"] {
+			courses = append(courses[:index], courses[index+1:]...)
+			var course Course
+			// request body have course which is decoded into course type
+			_ = json.NewDecoder(r.Body).Decode(&course)
+			course.CourseId = params["id"]
+			courses = append(courses, course)
+			json.NewEncoder(w).Encode(course)
+			return
 		}
 	}
+
+	//TODO: send a response when ID is not found
 
 }
 
