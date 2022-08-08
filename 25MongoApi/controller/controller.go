@@ -7,6 +7,8 @@ import (
 	"log"
 
 	"github.com/rohitv5/Golang-web-dev/25MongoApi/model"
+	"go.mongodb.org/mongo-driver/bson"
+	"go.mongodb.org/mongo-driver/bson/primitive"
 	"go.mongodb.org/mongo-driver/mongo"
 	"go.mongodb.org/mongo-driver/mongo/options"
 )
@@ -49,4 +51,24 @@ func insertOneMovie(movie model.Netflix) {
 	}
 
 	fmt.Println("Inserted 1 movie in db with id: ", inserted.InsertedID)
+}
+
+func updateOneMovie(movieId string, movie model.Netflix) {
+
+	//convert string to mongoDB objectID
+	id, _ := primitive.ObjectIDFromHex(movieId)
+
+	// bson.M for shorter and clearer results
+	// bson.D similar to above mostly
+
+	filter := bson.M{"_id": id}
+	update := bson.M{"$set": bson.M{"watched": true}}
+
+	result, err := collection.UpdateOne(context.Background(), filter, update)
+
+	if err != nil {
+		log.Fatal(err)
+	}
+
+	fmt.Println("Updated 1 movie in db with id: ", result.UpsertedID)
 }
