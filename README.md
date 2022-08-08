@@ -41,3 +41,7 @@ go build
 
 
 https://www.youtube.com/watch?v=vMpBUkIMLzY&list=PLRAV69dS1uWQGDQoBYMZWKjzuhCaOnBpa&index=38
+
+
+
+For mongodb in local make sure mongo service is running before troubleshooting.
