@@ -3,6 +3,7 @@ package main
 import (
 	"encoding/json"
 	"fmt"
+	"log"
 	"math/rand"
 	"net/http"
 	"strconv"
@@ -86,12 +87,19 @@ func createOneCourse(w http.ResponseWriter, r *http.Request) {
 		return
 	}
 
+	//TODO: check only if the title is duplicate , steps - loop through and matched the title and if found then return error
+
 	//generate unique id and convert to string
 
 	//append course into courses
 
 	rand.Seed(time.Now().UnixNano())
 	course.CourseId = strconv.Itoa(rand.Intn(100))
+
+	courses = append(courses, course)
+
+	//this sends response back to to the client
+	json.NewEncoder(w).Encode(course)
 
 }
 
@@ -133,16 +141,37 @@ func deleteOneCourse(w http.ResponseWriter, r *http.Request) {
 	for index, course := range courses {
 		if course.CourseId == params["id"] {
 			courses = append(courses[:index], courses[index+1:]...)
-			break;
+			json.NewEncoder(w).Encode(courses)
+			break
 		}
 	}
 
+	
+
 	//TODO: send a response when ID is not found
+
 
 }
 
-
-
 func main() {
+
+	fmt.Println("API - RV.in")
+	r := mux.NewRouter()
+
+	//seeding
+	courses = append(courses, Course{CourseId: "1", CourseName: "React", CoursePrice: 100, Author: &Author{Fullname: "Habibi Wallahi", Website: "rv.in"}})
+	courses = append(courses, Course{"2", "Angular", 300, &Author{"Rohit Verma", "rv.in"}})
+
+	//routing
+	r.HandleFunc("/", serveHome).Methods("GET")
+	r.HandleFunc("/courses", getAllCourses).Methods("GET")
+	r.HandleFunc("/course/{id}", getOneCourse).Methods("GET")
+	r.HandleFunc("/course", createOneCourse).Methods("POST")
+	r.HandleFunc("/course/{id}", updateOneCourse).Methods("PUT")
+	r.HandleFunc("/course/{id}", deleteOneCourse).Methods("DELETE")
+	
+
+	//listen to a port
+	log.Fatal(http.ListenAndServe(":4000", r))
 
 }
