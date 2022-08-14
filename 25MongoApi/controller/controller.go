@@ -3,9 +3,12 @@ package controller
 //learn more about context package
 import (
 	"context"
+	"encoding/json"
 	"fmt"
 	"log"
+	"net/http"
 
+	"github.com/gorilla/mux"
 	"github.com/rohitv5/Golang-web-dev/25MongoApi/model"
 	"go.mongodb.org/mongo-driver/bson"
 	"go.mongodb.org/mongo-driver/bson/primitive"
@@ -53,7 +56,7 @@ func insertOneMovie(movie model.Netflix) {
 	fmt.Println("Inserted 1 movie in db with id: ", inserted.InsertedID)
 }
 
-func updateOneMovie(movieId string, movie model.Netflix) {
+func updateOneMovie(movieId string) {
 
 	//convert string to mongoDB objectID
 	id, _ := primitive.ObjectIDFromHex(movieId)
@@ -126,3 +129,34 @@ func getAllMovies() []primitive.M {
 	return movies
 
 }
+
+// Actual controllers - file
+
+func GetAllMovies(w http.ResponseWriter, r *http.Request) {
+	w.Header().Set("Content-Type", "application/x-www-form-urlencode")
+	allMovies := getAllMovies()
+	json.NewEncoder(w).Encode(allMovies)
+}
+
+func CreateMovie(w http.ResponseWriter, r *http.Request) {
+	w.Header().Set("Content-Type", "application/x-www-form-urlencode")
+	w.Header().Set("Allow-Control-Allow-Methods", "POST")
+
+	var movie model.Netflix
+	_ = json.NewDecoder(r.Body).Decode(&movie)
+	insertOneMovie(movie)
+	json.NewEncoder(w).Encode(movie)
+}
+
+func MarkAsWatched(w http.ResponseWriter, r *http.Request) {
+	w.Header().Set("Content-Type", "application/x-www-form-urlencode")
+	w.Header().Set("Allow-Control-Allow-Methods", "POST")
+
+	params := mux.Vars(r)
+
+	updateOneMovie(params["id"])
+	json.NewEncoder(w).Encode(params["id"])
+
+}
+
+

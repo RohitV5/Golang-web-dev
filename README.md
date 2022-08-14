@@ -40,7 +40,7 @@ Making build for windows, unix and mac
 go build
 
 
-https://www.youtube.com/watch?v=vMpBUkIMLzY&list=PLRAV69dS1uWQGDQoBYMZWKjzuhCaOnBpa&index=38
+https://www.youtube.com/watch?v=vMpBUkIMLzY&list=PLRAV69dS1uWQGDQoBYMZWKjzuhCaOnBpa&index=50
 
 
 
