@@ -85,7 +85,6 @@ func deleteOneMovie(movieId string) {
 
 	fmt.Println("Movie got deleted with delete count: ", deleteCount)
 
-
 }
 
 // delete all records from mongodb
@@ -95,7 +94,7 @@ func deleteAllMovie(movieId string) {
 	//id, _ := primitive.ObjectIDFromHex(movieId)
 	// filter := bson.M{"_id": id}
 
-	//delete all 
+	//delete all
 	filter := bson.D{{}}
 	deleteResult, err := collection.DeleteMany(context.Background(), filter)
 
@@ -104,4 +103,26 @@ func deleteAllMovie(movieId string) {
 	}
 
 	fmt.Println("All Movie got deleted with delete count: ", deleteResult.DeletedCount)
+}
+
+func getAllMovies() []primitive.M {
+	cur, err := collection.Find(context.Background(), bson.D{{}})
+	if err != nil {
+		log.Fatal(err)
+	}
+
+	var movies []primitive.M
+	for cur.Next(context.Background()) {
+		var movie bson.M
+		err := cur.Decode(&movie)
+		if err != nil {
+			log.Fatal(err)
+		}
+		movies = append(movies, movie)
+	}
+
+	defer cur.Close(context.Background())
+
+	return movies
+
 }
