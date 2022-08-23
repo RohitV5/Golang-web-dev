@@ -16,7 +16,8 @@ import (
 	"go.mongodb.org/mongo-driver/mongo/options"
 )
 
-const connectionString = "mongodb://admin:admin@localhost:27017/?authMechanism=DEFAULT&authSource=admin"
+const connectionString = "mongodb://localhost:27017"
+// "mongodb://admin:admin@localhost:27017/?authMechanism=DEFAULT&authSource=admin"
 
 const dbName = "netflix_golang"
 const colName = "watchlist"
@@ -50,6 +51,7 @@ func insertOneMovie(movie model.Netflix) {
 	inserted, err := collection.InsertOne(context.Background(), movie)
 
 	if err != nil {
+		fmt.Println(err)
 		log.Fatal(err)
 	}
 
