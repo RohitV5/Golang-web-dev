@@ -45,3 +45,9 @@ https://www.youtube.com/watch?v=vMpBUkIMLzY&list=PLRAV69dS1uWQGDQoBYMZWKjzuhCaOn
 
 
 For mongodb in local make sure mongo service is running before troubleshooting.
+
+####Write go like a senior
+#####https://levelup.gitconnected.com/write-go-like-a-senior-engineer-eee7f03a1883
+
+####Different ways to initialize go struct.
+#####https://asankov.dev/blog/2022/01/29/different-ways-to-initialize-go-structs/
